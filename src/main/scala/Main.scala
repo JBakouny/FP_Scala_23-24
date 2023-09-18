@@ -2,28 +2,23 @@
 import annotation.tailrec
 
 @tailrec
-def mapReduce(zero: BigInt, op: (BigInt, BigInt) => BigInt, f : BigInt => BigInt, a: BigInt, b: BigInt) : BigInt = {
+def mapReduce(zero: BigInt, op: (BigInt, BigInt) => BigInt)
+(f : BigInt => BigInt)(a: BigInt, b: BigInt) : BigInt = {
   if (a > b) zero
-  else mapReduce(op(f(a), zero), op, f, a+1, b)
+  else mapReduce(op(f(a), zero), op)(f)(a+1, b)
 }
 
-def product(f : BigInt => BigInt, a: BigInt, b: BigInt) : BigInt =
-  mapReduce(1, _ * _, f, a, b)
+def product = mapReduce(1, _ * _)
 
-def sum(f : BigInt => BigInt, a: BigInt, b: BigInt) : BigInt =
-  mapReduce(0, _ + _, f, a, b)
+def sum = mapReduce(0, _ + _)
 
-def sumInts(a: BigInt, b: BigInt) : BigInt =
-  sum(x => x, a, b)
+def sumInts = sum(x => x)
 
-def sumCubes(a: BigInt, b: BigInt) : BigInt =
-  sum(x => x * x * x, a, b)
+def sumCubes = sum(x => x * x * x)
 
-def fact(n : BigInt) : BigInt =
-  product(x => x, 1, n)
+def fact(n : BigInt) : BigInt = product(x => x)(1, n)
 
-def sumFact(a: BigInt, b: BigInt): BigInt =
-  sum(fact, a, b)
+def sumFact = sum(fact)
 
 @main def hello: Unit =
   println(sumInts(0, 50))

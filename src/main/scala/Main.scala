@@ -4,15 +4,11 @@ def mapReduce(zero: BigInt, op: (BigInt, BigInt) => BigInt, f : BigInt => BigInt
   else op(f(a), mapReduce(zero, op, f, a+1, b))
 }
 
-def product(f : BigInt => BigInt, a: BigInt, b: BigInt) : BigInt = {
-  if (a > b) 1
-  else f(a) * product(f, a+1, b)
-}
+def product(f : BigInt => BigInt, a: BigInt, b: BigInt) : BigInt =
+  mapReduce(1, _ * _, f, a, b)
 
-def sum(f : BigInt => BigInt, a: BigInt, b: BigInt) : BigInt = {
-  if (a > b) 0
-  else f(a) + sum(f, a+1, b)
-}
+def sum(f : BigInt => BigInt, a: BigInt, b: BigInt) : BigInt =
+  mapReduce(0, _ + _, f, a, b)
 
 def sumInts(a: BigInt, b: BigInt) : BigInt =
   sum(x => x, a, b)

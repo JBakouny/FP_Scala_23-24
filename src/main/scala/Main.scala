@@ -1,7 +1,13 @@
 
+import annotation.tailrec
+
 def mapReduce(zero: BigInt, op: (BigInt, BigInt) => BigInt, f : BigInt => BigInt, a: BigInt, b: BigInt) : BigInt = {
-  if (a > b) zero
-  else op(f(a), mapReduce(zero, op, f, a+1, b))
+  @tailrec
+  def helper(i: BigInt, acc: BigInt) : BigInt = {
+    if (i > b) acc
+    else helper(i+1, op(f(i), acc))
+  }
+  helper(a, zero)
 }
 
 def product(f : BigInt => BigInt, a: BigInt, b: BigInt) : BigInt =

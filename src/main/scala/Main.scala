@@ -1,6 +1,8 @@
 
 import annotation.tailrec
 
+// ('a -> 'b) -> ('b -> 'c) -> ('a -> 'c)
+
 @tailrec
 def mapReduce(zero: BigInt, op: (BigInt, BigInt) => BigInt)
 (f : BigInt => BigInt)(a: BigInt, b: BigInt) : BigInt = {
@@ -8,9 +10,11 @@ def mapReduce(zero: BigInt, op: (BigInt, BigInt) => BigInt)
   else mapReduce(op(f(a), zero), op)(f)(a+1, b)
 }
 
-def product = mapReduce(1, _ * _)
+// (BigInt, (BigInt, BigInt) => BigInt) => (BigInt => BigInt) => (BigInt, BigInt) => BigInt
 
-def sum = mapReduce(0, _ + _)
+def product : (BigInt => BigInt) => (BigInt, BigInt) => BigInt = mapReduce(1, _ * _)
+
+def sum : (BigInt => BigInt) => (BigInt, BigInt) => BigInt = mapReduce(0, _ + _)
 
 def sumInts = sum(x => x)
 

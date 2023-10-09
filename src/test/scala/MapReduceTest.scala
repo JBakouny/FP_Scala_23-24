@@ -1,6 +1,6 @@
 // For more information on writing tests, see
 // https://scalameta.org/munit/docs/getting-started.html
-class MySuite extends munit.FunSuite {
+class MapReduceTest extends munit.FunSuite {
 
   test("sumInts succeeds") {
     val expected: BigInt = sumInts(0, 500)

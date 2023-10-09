@@ -3,7 +3,7 @@ class FixpointTest extends munit.FunSuite {
 
   test("fixpoint succeeds") {
     val expected = 2.0
-    val obtained = fixedPoint(x => 1 + x/2.0)(2)
+    val obtained = fixedPoint(x => 1 + x/2.0)(1)
     assertEquals(obtained, expected)
   }
 

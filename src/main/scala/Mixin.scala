@@ -26,16 +26,16 @@ class Actor extends Person with Singer with Dancer {
 }
 
 
-@main
-def main : Unit = {
-    val p = Person();
-    p.tell
-    val singer = new Person() with Singer
-    singer.tell
-    singer.sing
-    val a = Actor()
-    a.tell
-    a.act
-    a.sing
-    a.dance
-}
+// @main
+// def main : Unit = {
+//     val p = Person();
+//     p.tell
+//     val singer = new Person() with Singer
+//     singer.tell
+//     singer.sing
+//     val a = Actor()
+//     a.tell
+//     a.act
+//     a.sing
+//     a.dance
+// }
